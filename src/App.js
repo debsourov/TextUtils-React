@@ -8,8 +8,7 @@ import Contact from './components/Contact';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link,
+  Route, 
 } from "react-router-dom";
 
 function App() {
@@ -39,29 +38,18 @@ function App() {
     }
   }
 
-  const toggleBlue = () => {
-    if(mode === 'light') {
-      setMode('dark');
-      document.body.style.backgroundColor = '#102a43';
-      showAlert('Blue mode has been enabled', 'success')
-    } else{
-      setMode('light');
-      document.body.style.backgroundColor = 'white';
-      showAlert('Light mode has been enabled', 'success')
-    }
-  }
-
   return (
     < >
     <Router>
-      <Navbar title='TextUtils' mode={mode} toggleMode ={toggleMode} toggleBlue={toggleBlue} />
+      <Navbar title='TextUtils' mode={mode} toggleMode ={toggleMode}/>
       <Alert alert={alert}/>
       
         <Routes>
-            <Route exact path="/about" element={<About/>}/>
-            <Route exact path="/contact" element={<Contact/>}/>
             <Route exact path="/" element={<TextForm mode={mode} showAlert={showAlert}/>}/> 
+            <Route exact path="/about" element={<About mode={mode}/>}/>
+            <Route exact path="/contact" element={<Contact/>}/>
         </Routes>
+
     </Router>     
     </>
   );

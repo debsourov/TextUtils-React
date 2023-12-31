@@ -21,10 +21,8 @@ export default function TextForm(props) {
   };
 
   const handleCopy = () => {
-    const copyText = document.getElementById("myBox");
-    copyText.select();
-    navigator.clipboard.writeText(copyText.value);
-    props.showAlert("Text Copyed", "success");
+    navigator.clipboard.writeText(text);
+    props.showAlert("Copyed to Clipboard", "success");
   };
 
   const handleRmvSpace = () => {
@@ -59,22 +57,22 @@ export default function TextForm(props) {
             }}
           ></textarea>
         </div>
-        <button className="btn btn-primary me-3 mb-3" onClick={handleUpClick}>
+        <button disabled={text.length === 0} className="btn btn-primary me-3 mb-3" onClick={handleUpClick}>
           Convert to Uppercase
         </button>
-        <button className="btn btn-success me-3 mb-3" onClick={handleLwClick}>
+        <button disabled={text.length === 0} className="btn btn-success me-3 mb-3" onClick={handleLwClick}>
           Convert to lowercase
         </button>
-        <button className="btn btn-dark me-3 mb-3" onClick={handleCopy}>
+        <button disabled={text.length === 0} className="btn btn-dark me-3 mb-3" onClick={handleCopy}>
           Copy Text
         </button>
-        <button
+        <button disabled={text.length === 0}
           className="btn btn-secondary me-3 mb-3"
           onClick={handleRmvSpace}
         >
           Remove Extra Spaces
         </button>
-        <button className="btn btn-warning me-3 mb-3" onClick={handleClear}>
+        <button disabled={text.length === 0} className="btn btn-warning me-3 mb-3" onClick={handleClear}>
           Clear Text
         </button>
       </div>
@@ -84,10 +82,10 @@ export default function TextForm(props) {
       >
         <h1>Your text summary</h1>
         <p>
-          {text.split(" ").length} words and {text.length} characters
+          {text.split(/\s+/).filter((eliment) => {return eliment.length!==0}).length} words and {text.length} characters
         </p>
-        <h1 className="my-3">Privew</h1>
-        <p>{text}</p>
+        <h2 className="my-3">Privew</h2>
+        <p>{text.length>0? text:'Noting to privew!'}</p>
       </div>
     </>
   );
